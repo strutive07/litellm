@@ -338,6 +338,11 @@ class SkillsInjectionHook(CustomLogger):
         # Check if code execution is enabled for this request
         litellm_metadata = request_data.get("litellm_metadata", {})
         metadata = request_data.get("metadata", {})
+
+        if litellm_metadata is None:
+            litellm_metadata = {}
+        if metadata is None:
+            metadata = {}
         
         code_exec_enabled = (
             litellm_metadata.get("_litellm_code_execution_enabled") or
